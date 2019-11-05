@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "holder@2.9.6",
+      "destination": "Scripts/holder/"
+    },
+    {
+      "library": "feather-icons@4.24.1",
+      "destination": "Scripts/feather-icons/"
+    },
+    {
+      "library": "Chart.js@2.8.0",
+      "destination": "Scripts/Chart.js/"
+    },
+    {
+      "library": "fontawesome-iconpicker@3.2.0",
+      "destination": "Scripts/fontawesome-iconpicker/"
+    },
+    {
+      "library": "material-design-iconic-font@2.2.0",
+      "destination": "Scripts/material-design-iconic-font/"
+    }
+  ]
+}
