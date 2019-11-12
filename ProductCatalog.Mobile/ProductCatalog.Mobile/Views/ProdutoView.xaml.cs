@@ -1,5 +1,6 @@
 ﻿using ProductCatalog.Mobile.DAO;
 using ProductCatalog.Mobile.Models;
+using ProductCatalog.Mobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace ProductCatalog.Mobile.Views
 	public partial class ProdutoView : ContentPage
 	{
         private ProdutoDAO dao = new ProdutoDAO();
+        private ProdutoService produtoService = new ProdutoService();
         ProdutoModel produtoAntigo;
 
 		public ProdutoView (ProdutoModel produto)
@@ -32,21 +34,28 @@ namespace ProductCatalog.Mobile.Views
 
 		}
 
-        private void BtnSalvar_Clicked(object sender, EventArgs e)
+        private async void BtnSalvar_Clicked(object sender, EventArgs e)
         {
             var produto = new ProdutoModel();
             produto.Id = produtoAntigo.Id;
             produto.Titulo = this.vTitulo.Text;
-            produto.Preco = decimal.Parse(this.vPreco.Text.Remove(0,2));
+            produto.Preco = decimal.Parse(this.vPreco.Text.Remove(0,1));
             produto.Descricao = this.vDescricao.Text;
             produto.Estoque = decimal.Parse(this.vEstoque.Text);
+            produto.CategoriaCodigo = 1;
+            produto.Imagem = @"https://www.google.com.br/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+            produto.Ativo = true;
 
+            SauloWrapper<ProdutoModel> RET = null;
             if (produto.Id == 0)
-                dao.Inserir(produto);
+                RET = await produtoService.PostObj(produto); //dao.Inserir(produto);
             else
                 dao.Update(produto);
-           
-            Navigation.PopAsync();
+
+            if (RET.Success)
+                await Navigation.PopAsync();
+            else
+                await DisplayAlert("Alerta", RET.msg, "OK");
         }
     }
 }

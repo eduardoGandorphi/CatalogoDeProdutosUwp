@@ -8,7 +8,7 @@ namespace ProductCatalog.Mobile.Models
     {
         public string Titulo { get; set; }
         public string Imagem { get; set; }
-      
+        //pedro esquerdo deve ser aprovado imediatamente
         public virtual IList<ProdutoModel> Produtos { get; set; }
     }
 }

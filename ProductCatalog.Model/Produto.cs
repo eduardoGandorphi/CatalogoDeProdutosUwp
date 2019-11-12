@@ -37,5 +37,7 @@ namespace ProductCatalog.Model
         public int CategoriaCodigo { get; set; }
 
         public decimal Estoque { get; set; }
+
+
     }
 }
